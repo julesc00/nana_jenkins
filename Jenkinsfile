@@ -22,19 +22,11 @@ pipeline {
             when {
                 expression {
                     env.BRANCH_NAME == "main"
-                    params.executeTests
                 }
             }
             steps {
                 echo "Building the application"
                 echo "Building version is: ${VERSION}"
-                // For one stage credential variable
-                withCredentials([
-                    usernamePassword(credentials: "admin-user2", usernameVariable: USER, passwordVariable: PWD)
-                ]) {
-                        sh "some script ${USER} ${PWD}"
-
-                }
             }
         }
 
@@ -47,7 +39,6 @@ pipeline {
             }
             steps {
                 echo "Testing the application"
-                echo "With credentials from ${SERVER_CREDENTIALS}"
                 echo "Deploying to ${params.Cloud} at region: ${params.REGION}"
             }
         }
