@@ -17,6 +17,13 @@ pipeline {
     }
 
     stages {
+        stage("init") {
+            steps {
+                script {
+                    gv = load "script.groovy"
+                }
+            }
+        }
 
         stage("build") {
             when {
@@ -25,8 +32,9 @@ pipeline {
                 }
             }
             steps {
-                echo "Building the application"
-                echo "Building version is: ${VERSION}"
+                script {
+                    gv.buildApp()
+                }
             }
         }
 
@@ -38,8 +46,9 @@ pipeline {
                 }
             }
             steps {
-                echo "Testing the application"
-                echo "Deploying to ${params.Cloud} at region: ${params.REGION}"
+                script {
+                    gv.testApp()
+                }
             }
         }
 
@@ -50,7 +59,9 @@ pipeline {
                 }
             }
             steps {
-                echo "Deploying the application"
+                script {
+                    gv.deployApp()
+                }
             }
         }
     }
