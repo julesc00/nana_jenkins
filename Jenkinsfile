@@ -8,11 +8,6 @@ pipeline {
         SERVER_CREDENTIALS = credentials("admin-user2")
     }
 
-    // tools provides access build tools for your projects
-    tools {
-        maven "Maven"
-    }
-
     // Parameters
     parameters {
         string(name: "Cloud", defaultValue: "AWS", description: "Cloud Ecosystem.")
