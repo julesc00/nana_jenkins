@@ -47,6 +47,7 @@ pipeline {
                 }
             }
             steps {
+                // For groovy syntax
                 script {
                     gv.testApp()
                 }
